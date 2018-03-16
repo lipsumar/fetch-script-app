@@ -1,12 +1,13 @@
 <template>
   <div class="vars-panel">
-    <tree-view :object="global"></tree-view>
+    <tree-view :object="vars"></tree-view>
   </div>
 </template>
 
 <script>
 import TreeView from '@/components/TreeView/TreeView'
 export default {
+  props: ['vars'],
   created () {
     this.global = {
       oss: 117,
