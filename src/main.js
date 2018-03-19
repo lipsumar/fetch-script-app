@@ -5,6 +5,9 @@ import App from './App'
 import router from './router'
 import TreeItem from '@/components/TreeView/TreeViewItem'
 import Loader from '@/components/Loader'
+import Datatable from 'vue2-datatable-component'
+
+Vue.use(Datatable)
 
 Vue.config.productionTip = false
 

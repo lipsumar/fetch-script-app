@@ -21,7 +21,13 @@
             <div v-if="typeof o === 'string'"> <!-- nl2br -->
               <div v-for="(oo,ii) in o.split('\n')" :key="ii">{{oo}}</div>
             </div>
-            <template v-else>{{o}}</template>
+            <template v-else>
+              <template v-if="o.rows && o.columns">
+                <datatable :data="o.rows" :columns="o.columns.map(c => ({title:c,field:c,sortable:true}))" :total="o.rows.length" :query="{}"></datatable>
+              </template>
+              <template v-else>{{o}}</template>
+
+            </template>
           </div>
 
         </div>
@@ -69,7 +75,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less">
 .code-step, .code-step textarea{
   font-family: 'Roboto Mono',"SFMono-Regular",Consolas,"Liberation Mono",Menlo,Courier,monospace;
 }
@@ -87,7 +93,7 @@ export default {
 }
 .code-step__result{
   padding:0.8em;
-  color:slategrey;
+  color:#76cdf4;
 }
 
 .code-step-result{
@@ -95,5 +101,25 @@ export default {
 }
 .code-step-result__arrow{
   width:25px;
+  flex-shrink: 0;
+}
+
+.code-step-result__content [name="Datatable"]{
+
+  [name="HeaderSettings"]{
+    display:none
+  }
+
+  table > tbody > tr {
+    background-color: transparent
+  }
+  table > thead > tr > th,
+  table > tbody > tr > td{
+    border-color:#76cdf4;
+    border-width:1px;
+  }
+  table{
+    border:1px solid #76cdf4;
+  }
 }
 </style>
