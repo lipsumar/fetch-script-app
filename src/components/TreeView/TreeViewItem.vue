@@ -2,21 +2,20 @@
   <div class="tree-item">
     <template v-if="typeof value==='object'">
       <span v-if="name" class="tree-item__name">{{name}}:</span>
-      <template v-if="value instanceof Array">[</template>
-      <template v-else-if="typeof value === 'object'">{</template>
+      <span v-if="(value instanceof Array)" @click="close()" class="cursor-pointer">[</span>
+      <span v-else-if="typeof value === 'object'" @click="close()" class="cursor-pointer">{</span>
     </template>
 
     <template v-if="open">
-      <div v-if="value instanceof Array" class="tree-item__child">
-        <template v-for="(item_, i) in value">
+      <div v-if="(value instanceof Array)" class="tree-item__child">
+        <template v-for="(item_, i) in value.slice(0, arrayTo)">
           <tree-item
             :key="i"
             :item="item_"
             :name="null"
-            :append="i !== value.length-1 ? ',' : ''"
           ></tree-item>
         </template>
-        {{append}}
+        <div v-if="value.length > arrayTo" @click="arrayTo += 5" class="cursor-pointer">+ {{value.length - arrayTo}}</div>
       </div>
       <div v-else-if="typeof value === 'object'" class="tree-item__child">
         <tree-item
@@ -25,18 +24,17 @@
           :item="item_"
           :name="name_"
         ></tree-item>
-        {{append}}
       </div>
       <span v-else>
         <span v-if="name" class="tree-item__name">{{name}}:</span>
         <span :class="{'tree-item__value--string':typeof value==='string', 'tree-item__value--number':typeof value==='number'}">
           {{value}}
         </span>
-        {{append}}
+
       </span>
     </template>
     <span v-else>
-      <span v-if="typeof value === 'object'" @click="open = !open">+</span>
+      <span v-if="typeof value === 'object'" @click="open = true" class="cursor-pointer">+</span>
 
       <template v-else>
         <span v-if="name" class="tree-item__name">{{name}}:</span>
@@ -47,19 +45,19 @@
 
     </span>
 
-    <template v-if="value instanceof Array">]</template>
+    <template v-if="(value instanceof Array)">]</template>
     <template v-else-if="typeof value === 'object'">}</template>
-
   </div>
 </template>
 
 <script>
-
+const arrayToInit = 5
 export default {
-  props: ['name', 'item', 'append'],
+  props: ['name', 'item'],
   data () {
     return {
-      open: false
+      open: false,
+      arrayTo: arrayToInit
     }
   },
   computed: {
@@ -71,6 +69,12 @@ export default {
       } else {
         return this.item
       }
+    }
+  },
+  methods: {
+    close () {
+      this.open = false
+      this.arrayTo = arrayToInit
     }
   }
 }
@@ -91,4 +95,7 @@ export default {
   margin-left: 1em;
 }
 
+.cursor-pointer{
+  cursor:pointer
+}
 </style>
