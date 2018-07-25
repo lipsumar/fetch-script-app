@@ -1,4 +1,5 @@
 import axios from 'axios'
+import tokenManager from './tokenManager'
 
 export default {
   execute (code, sessionId) {
@@ -6,7 +7,7 @@ export default {
       url: 'http://localhost:3000/execute',
       method: 'post',
       headers: {
-        'Private-token': 'the-token'
+        'Private-token': tokenManager.token
       },
       data: {
         code,
