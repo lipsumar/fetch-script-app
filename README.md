@@ -1,4 +1,9 @@
-# fetch-script-app-v2
+# fetch-script-app
+
+> Front-end app for fetch-script
+
+This is the front-end part of the app, you'll also need a [back-end](https://github.com/lipsumar/fetch-script-server).
+
 
 ## Project setup
 ```
