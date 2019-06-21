@@ -39,7 +39,6 @@
 </template>
 
 <script>
-import fetchScriptApi from '@/api/fetchScriptApi'
 export default {
   props: ['value', 'sessionId'],
   data () {
@@ -63,7 +62,7 @@ export default {
   methods: {
     submit () {
       this.loading = true
-      fetchScriptApi.execute(this.code, this.sessionId)
+      this.$fetchScriptApi.execute(this.code, this.sessionId)
         .then(resp => {
           this.loading = false
           this.out = resp.data.out

@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import CodeStep from '@/components/CodeStep/CodeStep'
+import CodeStep from './CodeStep/CodeStep'
 export default {
   props: ['sessionId'],
   created () {

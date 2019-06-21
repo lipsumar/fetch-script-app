@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import TreeView from '@/components/TreeView/TreeView'
+import TreeView from './TreeView/TreeView'
 export default {
   props: ['vars'],
   created () {

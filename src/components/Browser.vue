@@ -10,13 +10,12 @@
 </template>
 
 <script>
-import CodePanel from '@/components/CodePanel'
-import VarsPanel from '@/components/VarsPanel'
-import fetchScriptApi from '@/api/fetchScriptApi'
+import CodePanel from './CodePanel'
+import VarsPanel from './VarsPanel'
 
 export default {
   created () {
-    fetchScriptApi.startSession()
+    this.$fetchScriptApi.startSession()
       .then(sessionId => {
         this.sessionId = sessionId
       })
